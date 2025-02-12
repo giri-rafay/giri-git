@@ -1,0 +1,36 @@
+apiVersion: infra.k8smgmt.io/v3
+kind: Blueprint
+metadata:
+  name: custom-bp
+  project: giri-nov
+spec:
+  base:
+    name: golden-bp
+    version: v2
+  componentsCriticality:
+  - name: addon-xwing
+  - name: addon-nginx
+  customAddons:
+  - dependsOn:
+    - addon-nginx
+    name: addon-xwing
+    version: v1
+  - name: addon-nginx
+    version: v1
+  defaultAddons:
+    enableIngress: true
+    enableMonitoring: true
+    monitoring:
+      gpuOperator:
+        enabled: true
+      metricsServer:
+        customizationEnabled: true
+      prometheusAdapter:
+        customizationEnabled: true
+  driftWebhook:
+    enabled: true
+  namespaceConfig:
+    enableSync: true
+    syncType: Unmanaged
+  type: custom
+  version: v1

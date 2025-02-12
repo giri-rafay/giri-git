@@ -1,0 +1,15 @@
+apiVersion: apps.k8smgmt.io/v3
+kind: Workload
+metadata:
+  name: workload-xwing
+  project: giri-nov
+spec:
+  artifact:
+    artifact:
+      paths:
+      - name: file://artifacts/workload-xwing/workload-xwing.yaml
+    type: Yaml
+  namespace: workload-ns
+  placement:
+    selector: rafay.dev/clusterName=giri-feb12-qc2
+  version: workload-xwing-v1-202502120711560000
