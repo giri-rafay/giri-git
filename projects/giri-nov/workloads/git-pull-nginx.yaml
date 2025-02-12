@@ -1,0 +1,21 @@
+apiVersion: apps.k8smgmt.io/v3
+kind: Workload
+metadata:
+  name: git-pull-nginx
+  project: giri-nov
+spec:
+  artifact:
+    artifact:
+      chartPath:
+        name: nginx-15.4.2.tgz
+      repository: giri-git
+      revision: main
+      valuesPaths:
+      - name: values.yaml
+    options:
+      maxHistory: 10
+      timeout: 5m0s
+    type: Helm
+  namespace: giri-nov-ns
+  placement:
+    selector: rafay.dev/clusterName=giri-feb12-qc2
