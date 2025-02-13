@@ -1,0 +1,20 @@
+apiVersion: apps.k8smgmt.io/v3
+kind: Workload
+metadata:
+  name: helm3-nginx
+  project: giri-nov
+spec:
+  artifact:
+    artifact:
+      chartPath:
+        name: file://artifacts/nginx/nginx-9.7.8.tgz
+      valuesPaths:
+      - name: file://artifacts/nginx/values.yaml
+    options:
+      maxHistory: 10
+      timeout: 5m0s
+    type: Helm
+  namespace: rctl-ns
+  placement:
+    selector: rafay.dev/clusterName=giri-feb12-qc2
+  version: helm3-chart-upload-multi-v2-v3
